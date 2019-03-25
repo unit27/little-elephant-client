@@ -8,7 +8,7 @@ namespace LittleElephantClient;
  *
  */
 class Client {
-    private const API_ROUTING = 'http://little-elephant.mordor/JSON/Api/Document/';
+    private const API_ROUTING = 'http://little-elephant.me/JSON/Api/Document/';
     private const API_SCAN_METHOD = 'scan';
     private const API_SCAN_USING_PREPROCESSOR_METHOD = 'scanWithPreprocessor';
     private const API_RESULT_METHOD = 'getResult';
