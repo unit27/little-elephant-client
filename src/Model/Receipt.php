@@ -205,8 +205,8 @@ class Receipt implements \LittleElephantClient\Model\DocumentInterface
     {
         $this->address = new \LittleElephantClient\Model\Partial\Address();
         foreach ($address as $key => $value) {
-            $method = 'set' . ucfirst($key);
-            if (method_exists($this->address, $method)) {
+            $method = 'set' . \ucfirst($key);
+            if (\method_exists($this->address, $method)) {
                 $this->address->{$method}($value);
             }
         }
@@ -222,8 +222,8 @@ class Receipt implements \LittleElephantClient\Model\DocumentInterface
         foreach ($items as $value) {
             $item = new \LittleElephantClient\Model\Partial\ReceiptItem();
             foreach ($value as $itemKey => $itemValue) {
-                $method = 'set' . ucfirst($itemKey);
-                if (method_exists($item, $method)) {
+                $method = 'set' . \ucfirst($itemKey);
+                if (\method_exists($item, $method)) {
                     $item->{$method}($itemValue);
                 }
             }

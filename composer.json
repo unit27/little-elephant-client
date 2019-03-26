@@ -1,6 +1,8 @@
 {
     "name": "unit27/little-elephant-client",
+    "type": "library",
     "description": "Client for Little Elephant",
+    "keywords": ["ocr", "scanning", "little", "elephant", "client"],
     "authors": [
         {
             "name": "Grzegorz Rombalski",
@@ -23,7 +25,6 @@
         "mockery/mockery": "^1.2"
     },
     "config": {
-        "vendor-dir": "libs",
-        "secure-http": false
+        "vendor-dir": "libs"
     }
 }

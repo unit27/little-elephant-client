@@ -177,8 +177,8 @@ class Invoice implements DocumentInterface
         foreach ($items as $value) {
             $item = new \LittleElephantClient\Model\Partial\InvoiceItem();
             foreach ($value as $itemKey => $itemValue) {
-                $method = 'set' . ucfirst($itemKey);
-                if (method_exists($item, $method)) {
+                $method = 'set' . \ucfirst($itemKey);
+                if (\method_exists($item, $method)) {
                     $item->{$method}($itemValue);
                 }
             }
@@ -198,8 +198,8 @@ class Invoice implements DocumentInterface
         foreach ($addresses as $array) {
             $address = new \LittleElephantClient\Model\Partial\Address();
             foreach ($array as $key => $value) {
-                $method = 'set' . ucfirst($key);
-                if (method_exists($address, $method)) {
+                $method = 'set' . \ucfirst($key);
+                if (\method_exists($address, $method)) {
                     $address->{$method}($value);
                 }
             }

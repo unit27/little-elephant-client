@@ -35,21 +35,21 @@ class Curl
      */
     public function sendFile(string $url, string $type, string $apiKey, \LittleElephantClient\File $file): string {
         $handler = \curl_init();
-        curl_setopt_array($handler, [
-            CURLOPT_URL => $url,
-            CURLOPT_HEADER => false,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => [
+        \curl_setopt_array($handler, [
+            \CURLOPT_URL => $url,
+            \CURLOPT_HEADER => false,
+            \CURLOPT_POST => 1,
+            \CURLOPT_HTTPHEADER => [
                 'Content-Type:multipart/form-data',
                 'Accept: application/json'
             ],
-            CURLOPT_POSTFIELDS => [
+            \CURLOPT_POSTFIELDS => [
                 'key' => $apiKey,
                 'type' => $type,
                 'file' => $file->getToSend()
             ],
-            CURLOPT_INFILESIZE => $file->getFileSize(),
-            CURLOPT_RETURNTRANSFER => true
+            \CURLOPT_INFILESIZE => $file->getFileSize(),
+            \CURLOPT_RETURNTRANSFER => true
         ]);
 
         return $this->handleResponse($handler);
@@ -66,18 +66,18 @@ class Curl
      */
     public function sendRequest(string $url, string $apiKey, string $fileId): string {
         $handler = \curl_init();
-        curl_setopt_array($handler, [
-            CURLOPT_URL => $url,
-            CURLOPT_HEADER => false,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => [
+        \curl_setopt_array($handler, [
+            \CURLOPT_URL => $url,
+            \CURLOPT_HEADER => false,
+            \CURLOPT_POST => 1,
+            \CURLOPT_HTTPHEADER => [
                 'Accept: application/json'
             ],
-            CURLOPT_POSTFIELDS => [
+            \CURLOPT_POSTFIELDS => [
                 'key' => $apiKey,
                 'token' => $fileId
             ],
-            CURLOPT_RETURNTRANSFER => true
+            \CURLOPT_RETURNTRANSFER => true
         ]);
 
         return $this->handleResponse($handler);

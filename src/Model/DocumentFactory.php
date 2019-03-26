@@ -35,7 +35,7 @@ class DocumentFactory
         }
 
         // build class name
-        $nameParts = explode('_', mb_strtolower($data['type']));
+        $nameParts = \explode('_', \mb_strtolower($data['type']));
         $name = '';
         foreach ($nameParts as $part) {
             $name .= ucfirst($part);
@@ -43,7 +43,7 @@ class DocumentFactory
 
         $className = '\\LittleElephantClient\\Model\\' . $name;
 
-        if (! class_exists($className)) {
+        if (! \class_exists($className)) {
             throw new \LittleElephantClient\Exception\MappingException('Invalid document type');
         }
 
@@ -59,8 +59,8 @@ class DocumentFactory
         }
 
         foreach ($data as $key => $value) {
-            $method = 'set' . ucfirst($key);
-            if (method_exists($model, $method)) {
+            $method = 'set' . \ucfirst($key);
+            if (\method_exists($model, $method)) {
                 $model->$method($value);
             }
         }

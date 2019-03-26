@@ -10,7 +10,7 @@ namespace LittleElephantClient\Tests;
 class ModelTest extends \PHPUnit\Framework\TestCase {
 
     /**
-     * @test
+     * @test noResult
      */
     public function noResult(): void {
         $model = \LittleElephantClient\Model\DocumentFactory::create($this->createNoResult());
@@ -18,7 +18,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
-     * @test
+     * @test automatic
      */
     public function automatic(): void {
         $model = \LittleElephantClient\Model\DocumentFactory::create($this->createAutomatic());
@@ -26,7 +26,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
-     * @test
+     * @test businessCard
      */
     public function businessCard(): void {
         $model = \LittleElephantClient\Model\DocumentFactory::create($this->createBusinessCard());
@@ -35,7 +35,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
-     * @test
+     * @test invoice
      */
     public function invoice(): void {
         $model = \LittleElephantClient\Model\DocumentFactory::create($this->createInvoice());
@@ -44,7 +44,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
-     * @test
+     * @test receipt
      */
     public function receipt(): void {
         $model = \LittleElephantClient\Model\DocumentFactory::create($this->createReceipt());
@@ -52,14 +52,18 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         $this->checkGetters($model);
     }
 
-    private function checkGetters(\LittleElephantClient\Model\DocumentInterface $model) {
-        foreach (get_class_methods(get_class($model)) as $method) {
-            if (0 === strpos($method, 'get')) { // getter
+    private function checkGetters(\LittleElephantClient\Model\DocumentInterface $model): void {
+        foreach (\get_class_methods(\get_class($model)) as $method) {
+            if (0 === \strpos($method, 'get')) { // getter
                 $model->{$method}(); // just fire get method, typed return will throw exception if anything goes wrong
             }
         }
     }
 
+    /**
+     *
+     * @return array
+     */
     private function createAutomatic(): array {
         return [
             'type' => \LittleElephantClient\Types::AUTOMATIC,
@@ -67,12 +71,20 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
+    /**
+     *
+     * @return array
+     */
     private function createNoResult(): array {
         return [
             'type' => \LittleElephantClient\Types::INVOICE
         ];
     }
 
+    /**
+     *
+     * @return array
+     */
     private function createBusinessCard(): array {
         return [
             'type' => \LittleElephantClient\Types::BUSINESS_CARD,
@@ -85,6 +97,10 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
+    /**
+     *
+     * @return array
+     */
     private function createInvoice(): array {
         return [
             'type' => \LittleElephantClient\Types::INVOICE,
@@ -113,6 +129,10 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
+    /**
+     *
+     * @return array
+     */
     private function createReceipt(): array {
         return [
             'type' => \LittleElephantClient\Types::RECEIPT,
