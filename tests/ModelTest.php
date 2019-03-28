@@ -142,11 +142,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
             'createdDate' => '2019-01-31 20:00:01',
             'companyName' => 'Company Name Test',
             'postalCode' => '00-001',
-            'address' => [
-                'address' => 'ul. Testowa 1/2',
-                'city' => 'Testowo Małe',
-                'postalCode' => '99-012'
-            ],
+            'address' => 'ul. Testowa 1/2 99-012 Testowo Małe',
             'items' => [
                 [
                     'name' => 'Item 1',

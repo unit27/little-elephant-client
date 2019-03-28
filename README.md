@@ -20,7 +20,7 @@ I zainstaluj:
 $> composer install
 ```
 
-Następnie udaj się do swojego panelu i wygeneruj klucz do api.
+Następnie udaj się do swojego [panelu](https://little-elephant.me/user/panel/apiKeys) i wygeneruj klucz do api.
 
 Na koniec zainicjuj gdziekolwiek w swojej aplikacji klienta używając w/w klucza.
 

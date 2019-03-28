@@ -48,7 +48,7 @@ class Receipt implements \LittleElephantClient\Model\DocumentInterface
     /**
      * Address
      *
-     * @var \LittleElephantClient\Model\Partial\Address
+     * @var string
      */
     private $address = null;
 
@@ -117,7 +117,7 @@ class Receipt implements \LittleElephantClient\Model\DocumentInterface
     /**
      * @return \LittleElephantClient\Model\Partial\Address|null
      */
-    public function getAddress(): ?\LittleElephantClient\Model\Partial\Address
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -199,17 +199,11 @@ class Receipt implements \LittleElephantClient\Model\DocumentInterface
     }
 
     /**
-     * @param array $address
+     * @param string $address
      */
-    public function setAddress(array $address)
+    public function setAddress(string $address)
     {
-        $this->address = new \LittleElephantClient\Model\Partial\Address();
-        foreach ($address as $key => $value) {
-            $method = 'set' . \ucfirst($key);
-            if (\method_exists($this->address, $method)) {
-                $this->address->{$method}($value);
-            }
-        }
+        $this->address = $address;
 
         return $this;
     }
@@ -241,6 +235,27 @@ class Receipt implements \LittleElephantClient\Model\DocumentInterface
         $this->additionalInformation = $additionalInformation;
 
         return $this;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function toArray(): array {
+        $items = [];
+        foreach ($this->items as $item) {
+            $items[] = $item->toArray();
+        }
+
+        return [
+            'deviceNumber'          => $this->deviceNumber,
+            'nip'                   => $this->nip,
+            'createdDate'           => $this->createdDate->format('Y-m-d H:i:s'),
+            'companyName'           => $this->companyName,
+            'address'               => $this->address,
+            'items'                 => $items,
+            'additionalInformation' => $this->additionalInformation
+        ];
     }
 
 }

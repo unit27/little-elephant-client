@@ -8,4 +8,9 @@ namespace LittleElephantClient\Model;
  */
 interface DocumentInterface
 {
+    /**
+     *
+     * @return array
+     */
+    public function toArray(): array;
 }

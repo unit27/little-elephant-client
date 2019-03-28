@@ -8,7 +8,7 @@ namespace LittleElephantClient;
  *
  */
 class Client {
-    private const API_ROUTING = 'http://little-elephant.me/JSON/Api/Document/';
+    private const API_ROUTING = 'http://little-elephant.mordor/JSON/Api/Document/';
     private const API_SCAN_METHOD = 'scan';
     private const API_SCAN_USING_PREPROCESSOR_METHOD = 'scanWithPreprocessor';
     private const API_RESULT_METHOD = 'getResult';
@@ -153,13 +153,13 @@ class Client {
      * @return string|array
      */
     private function parseResponse(string $response) {
-        $json = \json_decode($response);
+        $json = \json_decode($response, true);
 
-        if (true === $json->result) {
-            return $json->data;
+        if (true === $json['result']) {
+            return $json['data'];
         }
 
-        throw new \LittleElephantClient\Exception\ConnectionException($json->data->exception->message);
+        throw new \LittleElephantClient\Exception\ConnectionException($json['data']['exception']['message']);
     }
 
     /**
