@@ -224,7 +224,7 @@ class Invoice implements DocumentInterface
             'totalPurchaseValue' => $this->totalPurchaseValue,
             'number' => $this->number,
             'items' => $items,
-            'adresses' => $this->addresses,
+            'addresses' => $this->addresses,
             'createdDate' => $this->createdDate->format('Y-m-d H:i:s')
         ];
     }
