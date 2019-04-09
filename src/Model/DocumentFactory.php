@@ -60,11 +60,46 @@ class DocumentFactory
 
         foreach ($data as $key => $value) {
             $method = 'set' . \ucfirst($key);
-            if (\method_exists($model, $method)) {
+            if (\method_exists($model, $method) && null !== $value) {
                 $model->$method($value);
             }
         }
 
         return $model;
+    }
+
+    /**
+     *
+     * @param \LittleElephantClient\Model\DocumentInterface $model
+     * @return array
+     */
+    public static function toArray(\LittleElephantClient\Model\DocumentInterface $model): array {
+        return self::__toArray($model);
+    }
+
+    /**
+     *
+     * @param object $object
+     * @return array
+     */
+    private static function __toArray($object): array {
+        $reflection = new \ReflectionClass($object);
+        $array = [];
+        foreach ($reflection->getProperties() as $property) {
+            $getter = 'get' . \ucfirst($property->getName());
+            $value = $object->{$getter}();
+            if ($value instanceof \DateTime || $value instanceof \DateTimeImmutable) {
+                $value = $value->format('Y-m-d H:i:s');
+            } elseif ('items' === $property->getName()) {
+                $items = [];
+                foreach ($object->{$getter}() as $item) {
+                    $items[] = self::__toArray($item);
+                }
+                $value = $items;
+            }
+            $array[$property->getName()] = $value;
+        }
+
+        return $array;
     }
 }

@@ -45,7 +45,7 @@ class Invoice implements DocumentInterface
     /**
      * Addresses
      *
-     * @var \LittleElephantClient\Model\Partial\Address[]
+     * @var array
      */
     private $addresses = [];
 
@@ -195,16 +195,7 @@ class Invoice implements DocumentInterface
      */
     public function setAddresses(array $addresses): \LittleElephantClient\Model\Invoice
     {
-        foreach ($addresses as $array) {
-            $address = new \LittleElephantClient\Model\Partial\Address();
-            foreach ($array as $key => $value) {
-                $method = 'set' . \ucfirst($key);
-                if (\method_exists($address, $method)) {
-                    $address->{$method}($value);
-                }
-            }
-            $this->addresses[] = $address;
-        }
+        $this->addresses = $addresses;
 
         return $this;
     }
@@ -219,6 +210,23 @@ class Invoice implements DocumentInterface
         $this->createdDate = new \DateTimeImmutable($createdDate);
 
         return $this;
+    }
+
+    public function toArray(): array {
+        $items = [];
+        foreach ($this->items as $item) {
+            $items[] = $item->toArray();
+        }
+
+        return [
+            'buyerNip' => $this->buyerNip,
+            'sellerNip' => $this->sellerNip,
+            'totalPurchaseValue' => $this->totalPurchaseValue,
+            'number' => $this->number,
+            'items' => $items,
+            'addresses' => $this->addresses,
+            'createdDate' => $this->createdDate->format('Y-m-d H:i:s')
+        ];
     }
 
 }

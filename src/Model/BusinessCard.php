@@ -116,4 +116,18 @@ class BusinessCard implements \LittleElephantClient\Model\DocumentInterface
 
         return $this;
     }
+
+
+    /**
+     *
+     * @return array
+     */
+    public function toArray(): array {
+        return [
+            'fullName'   => $this->fullName,
+            'telephones' => $this->telephones,
+            'email'      => $this->email,
+            'website'    => $this->website
+        ];
+    }
 }
