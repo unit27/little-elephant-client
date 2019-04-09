@@ -57,4 +57,15 @@ abstract class BaseItem
 
         return $this;
     }
+
+    /**
+     *
+     * @return array
+     */
+    public function toArray(): array {
+        return [
+            'name' => $this->getName(),
+            'value' => $this->getValue()
+        ];
+    }
 }
